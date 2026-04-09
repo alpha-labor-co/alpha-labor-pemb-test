@@ -5,26 +5,29 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Alpha Labor Co - Pre-Engineered Metal Building Erection Screening Test</title>
     <style>
-        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap');
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap');
 
         * { margin: 0; padding: 0; box-sizing: border-box; }
 
         :root {
-            --navy: #0F2B5B;
+            --navy: #0B1D40;
+            --navy-mid: #0F2B5B;
             --navy-light: #1B3A87;
-            --red: #DC2626;
+            --accent: #3B82F6;
+            --accent-light: #60A5FA;
+            --red: #EF4444;
             --red-light: #FEE2E2;
             --white: #FFFFFF;
-            --gray-50: #F9FAFB;
-            --gray-100: #F3F4F6;
-            --gray-200: #E5E7EB;
-            --gray-300: #D1D5DB;
-            --gray-400: #9CA3AF;
-            --gray-500: #6B7280;
-            --gray-600: #4B5563;
-            --gray-700: #374151;
-            --gray-800: #1F2937;
-            --gray-900: #111827;
+            --gray-50: #F8FAFC;
+            --gray-100: #F1F5F9;
+            --gray-200: #E2E8F0;
+            --gray-300: #CBD5E1;
+            --gray-400: #94A3B8;
+            --gray-500: #64748B;
+            --gray-600: #475569;
+            --gray-700: #334155;
+            --gray-800: #1E293B;
+            --gray-900: #0F172A;
             --green-50: #F0FDF4;
             --green-500: #22C55E;
             --green-600: #16A34A;
@@ -32,16 +35,17 @@
             --amber-50: #FFFBEB;
             --amber-500: #F59E0B;
             --amber-700: #B45309;
-            --blue-50: #EFF6FF;
-            --blue-500: #3B82F6;
-            --shadow-sm: 0 1px 2px rgba(0,0,0,0.05);
+            --glass: rgba(255,255,255,0.06);
+            --glass-border: rgba(255,255,255,0.1);
+            --shadow-sm: 0 1px 2px rgba(0,0,0,0.06);
             --shadow: 0 1px 3px rgba(0,0,0,0.1), 0 1px 2px rgba(0,0,0,0.06);
             --shadow-md: 0 4px 6px -1px rgba(0,0,0,0.1), 0 2px 4px -1px rgba(0,0,0,0.06);
-            --shadow-lg: 0 10px 15px -3px rgba(0,0,0,0.1), 0 4px 6px -2px rgba(0,0,0,0.05);
-            --shadow-xl: 0 20px 25px -5px rgba(0,0,0,0.1), 0 10px 10px -5px rgba(0,0,0,0.04);
+            --shadow-lg: 0 10px 15px -3px rgba(0,0,0,0.08), 0 4px 6px -2px rgba(0,0,0,0.04);
+            --shadow-xl: 0 20px 40px -8px rgba(0,0,0,0.12);
+            --shadow-glow: 0 0 40px rgba(59,130,246,0.15);
             --radius: 12px;
             --radius-lg: 16px;
-            --radius-xl: 20px;
+            --radius-xl: 24px;
         }
 
         body {
@@ -56,34 +60,37 @@
         /* ===== LANGUAGE TOGGLE ===== */
         .lang-toggle {
             position: fixed;
-            top: 16px;
-            right: 16px;
+            top: 20px;
+            right: 20px;
             z-index: 100;
             display: flex;
-            background: var(--white);
-            border-radius: 100px;
+            background: rgba(255,255,255,0.95);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border-radius: var(--radius);
             padding: 4px;
-            box-shadow: var(--shadow-md);
+            box-shadow: var(--shadow-lg);
             border: 1px solid var(--gray-200);
         }
         .lang-btn {
-            padding: 6px 14px;
+            padding: 10px 22px;
             border: none;
             background: transparent;
             color: var(--gray-500);
             cursor: pointer;
-            border-radius: 100px;
-            font-size: 13px;
-            font-weight: 600;
+            border-radius: 10px;
+            font-size: 14px;
+            font-weight: 700;
             font-family: inherit;
-            transition: all 0.2s ease;
+            transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+            letter-spacing: 0.01em;
         }
         .lang-btn.active {
             background: var(--navy);
             color: var(--white);
-            box-shadow: var(--shadow-sm);
+            box-shadow: 0 2px 8px rgba(11,29,64,0.3);
         }
-        .lang-btn:not(.active):hover { background: var(--gray-100); }
+        .lang-btn:not(.active):hover { background: var(--gray-100); color: var(--gray-700); }
 
         /* ===== PAGE SECTIONS ===== */
         .page { display: none; min-height: 100vh; }
@@ -95,29 +102,39 @@
             align-items: center;
             justify-content: center;
             padding: 40px 20px;
-            background: linear-gradient(135deg, #0F2B5B 0%, #1B3A87 50%, #2a4a9a 100%);
+            background: var(--navy);
             position: relative;
             overflow: hidden;
         }
         .landing-page::before {
             content: '';
             position: absolute;
-            top: -50%;
-            right: -20%;
-            width: 600px;
-            height: 600px;
-            background: radial-gradient(circle, rgba(220,38,38,0.15) 0%, transparent 70%);
+            top: -40%;
+            right: -15%;
+            width: 700px;
+            height: 700px;
+            background: radial-gradient(circle, rgba(59,130,246,0.12) 0%, transparent 65%);
             border-radius: 50%;
         }
         .landing-page::after {
             content: '';
             position: absolute;
-            bottom: -30%;
+            bottom: -20%;
             left: -10%;
             width: 500px;
             height: 500px;
-            background: radial-gradient(circle, rgba(255,255,255,0.05) 0%, transparent 70%);
+            background: radial-gradient(circle, rgba(239,68,68,0.08) 0%, transparent 65%);
             border-radius: 50%;
+        }
+        /* Grid pattern overlay */
+        .landing-grid {
+            position: absolute;
+            inset: 0;
+            background-image:
+                linear-gradient(rgba(255,255,255,0.03) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(255,255,255,0.03) 1px, transparent 1px);
+            background-size: 60px 60px;
+            pointer-events: none;
         }
         .landing-card {
             max-width: 560px;
@@ -125,7 +142,7 @@
             background: var(--white);
             border-radius: var(--radius-xl);
             padding: 48px 40px;
-            box-shadow: var(--shadow-xl);
+            box-shadow: var(--shadow-xl), var(--shadow-glow);
             position: relative;
             z-index: 1;
             animation: cardIn 0.6s cubic-bezier(0.16, 1, 0.3, 1);
@@ -134,24 +151,17 @@
             from { opacity: 0; transform: translateY(30px) scale(0.97); }
             to { opacity: 1; transform: translateY(0) scale(1); }
         }
-        .logo-mark {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            margin-bottom: 8px;
-        }
-        .logo-mark svg { width: 180px; height: auto; }
         .landing-badge {
             display: inline-flex;
             align-items: center;
-            gap: 6px;
-            background: var(--navy);
+            gap: 8px;
+            background: linear-gradient(135deg, var(--navy), var(--navy-mid));
             color: var(--white);
-            padding: 6px 14px;
+            padding: 7px 16px;
             border-radius: 100px;
             font-size: 11px;
             font-weight: 700;
-            letter-spacing: 1px;
+            letter-spacing: 1.2px;
             text-transform: uppercase;
             margin-bottom: 24px;
         }
@@ -159,8 +169,9 @@
             content: '';
             width: 6px;
             height: 6px;
-            background: var(--red);
+            background: var(--accent-light);
             border-radius: 50%;
+            box-shadow: 0 0 6px var(--accent-light);
         }
         .landing-card h1 {
             font-size: 26px;
@@ -168,6 +179,7 @@
             color: var(--gray-900);
             margin-bottom: 12px;
             line-height: 1.2;
+            letter-spacing: -0.02em;
         }
         .landing-card .intro {
             font-size: 15px;
@@ -178,18 +190,20 @@
         .info-grid {
             display: grid;
             grid-template-columns: 1fr 1fr;
-            gap: 12px;
+            gap: 10px;
             margin-bottom: 28px;
         }
         .info-chip {
             display: flex;
             align-items: center;
-            gap: 10px;
-            padding: 12px 14px;
+            gap: 12px;
+            padding: 14px 16px;
             background: var(--gray-50);
             border-radius: var(--radius);
-            border: 1px solid var(--gray-200);
+            border: 1px solid var(--gray-100);
+            transition: all 0.2s ease;
         }
+        .info-chip:hover { border-color: var(--gray-200); background: var(--white); }
         .info-chip .icon {
             width: 36px;
             height: 36px;
@@ -197,16 +211,16 @@
             display: flex;
             align-items: center;
             justify-content: center;
-            font-size: 16px;
             flex-shrink: 0;
         }
-        .info-chip .icon.blue { background: var(--blue-50); }
-        .info-chip .icon.green { background: var(--green-50); }
-        .info-chip .icon.amber { background: var(--amber-50); }
-        .info-chip .icon.red { background: var(--red-light); }
+        .info-chip .icon svg { width: 18px; height: 18px; }
+        .info-chip .icon.blue { background: #EFF6FF; color: #3B82F6; }
+        .info-chip .icon.green { background: #F0FDF4; color: #22C55E; }
+        .info-chip .icon.amber { background: #FFFBEB; color: #F59E0B; }
+        .info-chip .icon.slate { background: var(--gray-100); color: var(--gray-600); }
         .info-chip .text {
             font-size: 13px;
-            font-weight: 500;
+            font-weight: 600;
             color: var(--gray-700);
             line-height: 1.3;
         }
@@ -214,16 +228,16 @@
             font-size: 14px;
             color: var(--gray-500);
             margin-bottom: 28px;
-            padding: 14px;
-            background: var(--blue-50);
+            padding: 14px 16px;
+            background: var(--gray-50);
             border-radius: var(--radius);
-            border-left: 3px solid var(--blue-500);
+            border-left: 3px solid var(--accent);
             line-height: 1.6;
         }
         .btn-start {
             width: 100%;
             padding: 16px;
-            background: var(--navy);
+            background: linear-gradient(135deg, var(--navy), var(--navy-mid));
             color: var(--white);
             border: none;
             border-radius: var(--radius);
@@ -231,16 +245,16 @@
             font-weight: 700;
             font-family: inherit;
             cursor: pointer;
-            transition: all 0.2s ease;
+            transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
             display: flex;
             align-items: center;
             justify-content: center;
             gap: 8px;
+            letter-spacing: 0.01em;
         }
         .btn-start:hover {
-            background: var(--gray-900);
-            transform: translateY(-1px);
-            box-shadow: var(--shadow-lg);
+            transform: translateY(-2px);
+            box-shadow: 0 8px 24px rgba(11,29,64,0.3);
         }
         .btn-start:active { transform: translateY(0); }
         .btn-start svg { width: 18px; height: 18px; }
@@ -262,7 +276,7 @@
             box-shadow: var(--shadow-lg);
             animation: cardIn 0.6s cubic-bezier(0.16, 1, 0.3, 1);
         }
-        .knockout-emoji {
+        .knockout-icon {
             width: 64px;
             height: 64px;
             background: var(--amber-50);
@@ -270,14 +284,16 @@
             display: flex;
             align-items: center;
             justify-content: center;
-            font-size: 28px;
             margin: 0 auto 24px;
+            color: var(--amber-500);
         }
+        .knockout-icon svg { width: 28px; height: 28px; }
         .knockout-card h2 {
             font-size: 22px;
             font-weight: 700;
             margin-bottom: 12px;
             color: var(--gray-900);
+            letter-spacing: -0.01em;
         }
         .knockout-card p {
             font-size: 15px;
@@ -297,7 +313,9 @@
         /* Top progress strip */
         .progress-strip {
             width: 100%;
-            background: var(--white);
+            background: rgba(255,255,255,0.95);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
             border-bottom: 1px solid var(--gray-200);
             padding: 16px 20px 14px;
             position: sticky;
@@ -315,25 +333,27 @@
             margin-bottom: 10px;
         }
         .progress-label {
-            font-size: 13px;
-            font-weight: 600;
-            color: var(--gray-500);
+            font-size: 12px;
+            font-weight: 700;
+            color: var(--gray-400);
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
         }
         .progress-count {
             font-size: 13px;
-            font-weight: 700;
+            font-weight: 800;
             color: var(--navy);
         }
         .progress-track {
             width: 100%;
-            height: 6px;
+            height: 5px;
             background: var(--gray-200);
             border-radius: 100px;
             overflow: hidden;
         }
         .progress-fill {
             height: 100%;
-            background: linear-gradient(90deg, var(--navy), var(--navy-light));
+            background: linear-gradient(90deg, var(--navy), var(--accent));
             border-radius: 100px;
             transition: width 0.5s cubic-bezier(0.16, 1, 0.3, 1);
         }
@@ -353,25 +373,26 @@
             display: inline-flex;
             align-items: center;
             gap: 6px;
-            padding: 4px 10px;
-            border-radius: 6px;
-            font-size: 11px;
-            font-weight: 700;
-            letter-spacing: 0.5px;
+            padding: 5px 12px;
+            border-radius: 8px;
+            font-size: 10px;
+            font-weight: 800;
+            letter-spacing: 0.8px;
             text-transform: uppercase;
             margin-bottom: 16px;
         }
-        .q-category.info { background: var(--blue-50); color: #2563EB; }
+        .q-category.info { background: #EFF6FF; color: #2563EB; }
         .q-category.technical { background: var(--amber-50); color: var(--amber-700); }
         .q-category.logistics { background: var(--green-50); color: var(--green-700); }
         .q-category.referral { background: #F5F3FF; color: #7C3AED; }
 
         .q-title {
             font-size: 22px;
-            font-weight: 700;
+            font-weight: 800;
             color: var(--gray-900);
             margin-bottom: 6px;
             line-height: 1.3;
+            letter-spacing: -0.02em;
         }
         .q-subtitle {
             font-size: 14px;
@@ -382,9 +403,9 @@
         .q-body {
             background: var(--white);
             border-radius: var(--radius-lg);
-            padding: 28px;
+            padding: 24px;
             box-shadow: var(--shadow-md);
-            border: 1px solid var(--gray-200);
+            border: 1px solid var(--gray-100);
         }
 
         /* Radio / MC options */
@@ -393,29 +414,31 @@
             align-items: flex-start;
             gap: 14px;
             padding: 14px 16px;
-            border: 2px solid var(--gray-200);
+            border: 1.5px solid var(--gray-200);
             border-radius: var(--radius);
-            margin-bottom: 10px;
+            margin-bottom: 8px;
             cursor: pointer;
-            transition: all 0.15s ease;
+            transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
             background: var(--white);
         }
         .option-item:last-child { margin-bottom: 0; }
         .option-item:hover {
             border-color: var(--gray-300);
             background: var(--gray-50);
+            transform: translateY(-1px);
         }
         .option-item.selected {
             border-color: var(--navy);
             background: #EFF3FB;
+            box-shadow: 0 0 0 1px var(--navy);
         }
         .option-radio {
-            width: 22px;
-            height: 22px;
+            width: 20px;
+            height: 20px;
             border-radius: 50%;
             border: 2px solid var(--gray-300);
             flex-shrink: 0;
-            margin-top: 1px;
+            margin-top: 2px;
             transition: all 0.15s ease;
             display: flex;
             align-items: center;
@@ -427,8 +450,8 @@
         }
         .option-item.selected .option-radio::after {
             content: '';
-            width: 8px;
-            height: 8px;
+            width: 7px;
+            height: 7px;
             background: var(--white);
             border-radius: 50%;
         }
@@ -440,9 +463,9 @@
             display: flex;
             align-items: center;
             justify-content: center;
-            font-size: 12px;
-            font-weight: 700;
-            color: var(--gray-500);
+            font-size: 11px;
+            font-weight: 800;
+            color: var(--gray-400);
             flex-shrink: 0;
             transition: all 0.15s ease;
         }
@@ -452,42 +475,44 @@
         }
         .option-text {
             font-size: 15px;
-            color: var(--gray-700);
+            color: var(--gray-600);
             line-height: 1.5;
             flex: 1;
         }
-        .option-item.selected .option-text { color: var(--gray-900); font-weight: 500; }
+        .option-item.selected .option-text { color: var(--gray-900); font-weight: 600; }
 
         /* Text inputs */
         .field-group { margin-bottom: 20px; }
         .field-group:last-child { margin-bottom: 0; }
         .field-label {
             display: block;
-            font-size: 13px;
-            font-weight: 600;
-            color: var(--gray-700);
+            font-size: 12px;
+            font-weight: 700;
+            color: var(--gray-500);
             margin-bottom: 6px;
+            text-transform: uppercase;
+            letter-spacing: 0.3px;
         }
         .field-input {
             width: 100%;
             padding: 12px 14px;
-            border: 2px solid var(--gray-200);
+            border: 1.5px solid var(--gray-200);
             border-radius: var(--radius);
             font-size: 15px;
             font-family: inherit;
             color: var(--gray-900);
             background: var(--white);
-            transition: all 0.15s ease;
+            transition: all 0.2s ease;
         }
         .field-input:focus {
             outline: none;
-            border-color: var(--navy);
-            box-shadow: 0 0 0 3px rgba(27, 58, 135, 0.1);
+            border-color: var(--accent);
+            box-shadow: 0 0 0 3px rgba(59,130,246,0.1);
         }
         .field-input::placeholder { color: var(--gray-400); }
         select.field-input {
             appearance: none;
-            background-image: url("data:image/svg+xml,%3Csvg width='12' height='8' viewBox='0 0 12 8' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M1 1.5L6 6.5L11 1.5' stroke='%239CA3AF' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E");
+            background-image: url("data:image/svg+xml,%3Csvg width='12' height='8' viewBox='0 0 12 8' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M1 1.5L6 6.5L11 1.5' stroke='%2394A3B8' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E");
             background-repeat: no-repeat;
             background-position: right 14px center;
             padding-right: 36px;
@@ -499,21 +524,22 @@
             align-items: center;
             gap: 12px;
             padding: 12px 14px;
-            border: 2px solid var(--gray-200);
+            border: 1.5px solid var(--gray-200);
             border-radius: var(--radius);
             margin-bottom: 8px;
             cursor: pointer;
-            transition: all 0.15s ease;
+            transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
         }
         .check-item:last-child { margin-bottom: 0; }
         .check-item:hover { border-color: var(--gray-300); background: var(--gray-50); }
         .check-item.checked {
             border-color: var(--green-600);
             background: var(--green-50);
+            box-shadow: 0 0 0 1px var(--green-600);
         }
         .check-box {
-            width: 22px;
-            height: 22px;
+            width: 20px;
+            height: 20px;
             border: 2px solid var(--gray-300);
             border-radius: 6px;
             flex-shrink: 0;
@@ -534,11 +560,11 @@
         }
         .check-label {
             font-size: 14px;
-            color: var(--gray-700);
+            color: var(--gray-600);
             line-height: 1.4;
             flex: 1;
         }
-        .check-item.checked .check-label { color: var(--gray-900); font-weight: 500; }
+        .check-item.checked .check-label { color: var(--gray-900); font-weight: 600; }
 
         /* Nav buttons */
         .nav-bar {
@@ -546,26 +572,28 @@
             bottom: 0;
             left: 0;
             right: 0;
-            background: var(--white);
+            background: rgba(255,255,255,0.95);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
             border-top: 1px solid var(--gray-200);
-            padding: 16px 20px;
+            padding: 14px 20px;
             z-index: 50;
         }
         .nav-inner {
             max-width: 640px;
             margin: 0 auto;
             display: flex;
-            gap: 12px;
+            gap: 10px;
         }
         .btn {
             padding: 12px 24px;
             border: none;
             border-radius: var(--radius);
             font-size: 15px;
-            font-weight: 600;
+            font-weight: 700;
             font-family: inherit;
             cursor: pointer;
-            transition: all 0.15s ease;
+            transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
             display: flex;
             align-items: center;
             justify-content: center;
@@ -581,10 +609,10 @@
         .btn-back:disabled:hover { background: var(--gray-100); }
         .btn-next {
             flex: 1;
-            background: var(--navy);
+            background: linear-gradient(135deg, var(--navy), var(--navy-mid));
             color: var(--white);
         }
-        .btn-next:hover { background: var(--gray-900); }
+        .btn-next:hover { box-shadow: 0 4px 16px rgba(11,29,64,0.25); transform: translateY(-1px); }
         .btn-next svg { width: 16px; height: 16px; }
 
         /* ===== RESULTS / THANKS PAGE ===== */
@@ -593,19 +621,28 @@
             align-items: center;
             justify-content: center;
             padding: 40px 20px;
-            background: linear-gradient(135deg, #0F2B5B 0%, #1B3A87 50%, #2a4a9a 100%);
+            background: var(--navy);
             position: relative;
             overflow: hidden;
         }
         .results-page::before {
             content: '';
             position: absolute;
-            top: -50%;
-            right: -20%;
+            top: -40%;
+            right: -15%;
             width: 600px;
             height: 600px;
-            background: radial-gradient(circle, rgba(34,197,94,0.12) 0%, transparent 70%);
+            background: radial-gradient(circle, rgba(34,197,94,0.1) 0%, transparent 65%);
             border-radius: 50%;
+        }
+        .results-grid {
+            position: absolute;
+            inset: 0;
+            background-image:
+                linear-gradient(rgba(255,255,255,0.02) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(255,255,255,0.02) 1px, transparent 1px);
+            background-size: 60px 60px;
+            pointer-events: none;
         }
         .thanks-card {
             max-width: 520px;
@@ -614,7 +651,7 @@
             border-radius: var(--radius-xl);
             padding: 56px 44px;
             text-align: center;
-            box-shadow: var(--shadow-xl);
+            box-shadow: var(--shadow-xl), var(--shadow-glow);
             position: relative;
             z-index: 1;
             animation: cardIn 0.6s cubic-bezier(0.16, 1, 0.3, 1);
@@ -641,6 +678,7 @@
             font-weight: 800;
             color: var(--gray-900);
             margin-bottom: 12px;
+            letter-spacing: -0.02em;
         }
         .thanks-card p {
             font-size: 16px;
@@ -650,7 +688,7 @@
         .thanks-divider {
             width: 48px;
             height: 3px;
-            background: var(--gray-200);
+            background: linear-gradient(90deg, var(--accent), var(--accent-light));
             border-radius: 100px;
             margin: 28px auto;
         }
@@ -680,7 +718,7 @@
             flex: 1;
             -webkit-appearance: none;
             appearance: none;
-            height: 8px;
+            height: 6px;
             background: var(--gray-200);
             border-radius: 100px;
             outline: none;
@@ -688,25 +726,25 @@
         }
         .rating-range::-webkit-slider-thumb {
             -webkit-appearance: none;
-            width: 24px;
-            height: 24px;
+            width: 22px;
+            height: 22px;
             background: var(--navy);
             border-radius: 50%;
             cursor: pointer;
-            box-shadow: 0 2px 6px rgba(15,43,91,0.3);
+            box-shadow: 0 2px 8px rgba(11,29,64,0.3);
             transition: transform 0.15s ease;
         }
         .rating-range::-webkit-slider-thumb:hover {
             transform: scale(1.15);
         }
         .rating-range::-moz-range-thumb {
-            width: 24px;
-            height: 24px;
+            width: 22px;
+            height: 22px;
             background: var(--navy);
             border-radius: 50%;
             cursor: pointer;
             border: none;
-            box-shadow: 0 2px 6px rgba(15,43,91,0.3);
+            box-shadow: 0 2px 8px rgba(11,29,64,0.3);
         }
         .rating-value {
             width: 36px;
@@ -717,8 +755,8 @@
             display: flex;
             align-items: center;
             justify-content: center;
-            font-size: 15px;
-            font-weight: 700;
+            font-size: 14px;
+            font-weight: 800;
             flex-shrink: 0;
         }
 
@@ -733,7 +771,7 @@
             padding: 10px 20px;
             border-radius: 100px;
             font-size: 14px;
-            font-weight: 500;
+            font-weight: 600;
             z-index: 200;
             opacity: 0;
             transition: all 0.3s ease;
@@ -752,10 +790,8 @@
             .info-grid { grid-template-columns: 1fr; }
             .q-title { font-size: 19px; }
             .q-body { padding: 20px; }
-            .score-hero { padding: 36px 24px; }
-            .results-card { padding: 20px; }
-            .results-actions { flex-direction: column; }
             .knockout-card { padding: 36px 24px; }
+            .lang-btn { padding: 8px 16px; font-size: 13px; }
         }
 
         @media print {
@@ -770,8 +806,8 @@
 
 <!-- Language Toggle -->
 <div class="lang-toggle">
-    <button class="lang-btn active" data-lang="en">EN</button>
-    <button class="lang-btn" data-lang="es">ES</button>
+    <button class="lang-btn active" data-lang="en">English</button>
+    <button class="lang-btn" data-lang="es">Espa&ntilde;ol</button>
 </div>
 
 <!-- Toast -->
@@ -779,6 +815,7 @@
 
 <!-- ===== LANDING ===== -->
 <div class="page landing-page active" id="landingPage">
+    <div class="landing-grid"></div>
     <div class="landing-card">
         <div style="text-align:center;">
             <span class="landing-badge" id="landingBadge">PEMB Erection Screening Test</span>
@@ -788,10 +825,22 @@
         <p class="intro" id="landingIntro">Thanks for your interest in joining our team. This screening test evaluates your knowledge and hands-on experience with pre-engineered metal building (PEMB) erection to help us match you to the right projects.</p>
 
         <div class="info-grid" id="infoGrid">
-            <div class="info-chip"><div class="icon blue">&#9201;</div><div class="text" data-i18n="chip1">15 questions, 5-10 min</div></div>
-            <div class="info-chip"><div class="icon green">&#9989;</div><div class="text" data-i18n="chip2">No trick questions</div></div>
-            <div class="info-chip"><div class="icon amber">&#128221;</div><div class="text" data-i18n="chip3">Mix of knowledge & info</div></div>
-            <div class="info-chip"><div class="icon red">&#10084;</div><div class="text" data-i18n="chip4">Be honest, that's it</div></div>
+            <div class="info-chip">
+                <div class="icon blue"><svg viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm1-12a1 1 0 10-2 0v4a1 1 0 00.293.707l2.828 2.829a1 1 0 101.415-1.415L11 9.586V6z" clip-rule="evenodd"/></svg></div>
+                <div class="text" data-i18n="chip1">15 questions, 5-10 min</div>
+            </div>
+            <div class="info-chip">
+                <div class="icon green"><svg viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/></svg></div>
+                <div class="text" data-i18n="chip2">No trick questions</div>
+            </div>
+            <div class="info-chip">
+                <div class="icon amber"><svg viewBox="0 0 20 20" fill="currentColor"><path d="M9 4.804A7.968 7.968 0 005.5 4c-1.255 0-2.443.29-3.5.804v10A7.969 7.969 0 015.5 14c1.669 0 3.218.51 4.5 1.385A7.962 7.962 0 0114.5 14c1.255 0 2.443.29 3.5.804v-10A7.968 7.968 0 0014.5 4c-1.255 0-2.443.29-3.5.804V12a1 1 0 11-2 0V4.804z"/></svg></div>
+                <div class="text" data-i18n="chip3">Mix of knowledge & info</div>
+            </div>
+            <div class="info-chip">
+                <div class="icon slate"><svg viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7-4a1 1 0 11-2 0 1 1 0 012 0zM9 9a1 1 0 000 2v3a1 1 0 001 1h1a1 1 0 100-2v-3a1 1 0 00-1-1H9z" clip-rule="evenodd"/></svg></div>
+                <div class="text" data-i18n="chip4">Be honest, that's it</div>
+            </div>
         </div>
 
         <div class="landing-note" id="landingNote">Your results help us figure out the best fit for you. This isn't pass/fail &mdash; it's about finding where you'll succeed.</div>
@@ -806,7 +855,9 @@
 <!-- ===== KNOCKOUT ===== -->
 <div class="page knockout-page" id="knockoutPage">
     <div class="knockout-card">
-        <div class="knockout-emoji">&#128075;</div>
+        <div class="knockout-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
+        </div>
         <h2 id="koTitle">Thanks for your interest in Alpha Labor Co</h2>
         <p id="koText">This position requires hands-on experience erecting pre-engineered metal buildings. We encourage you to gain field experience and apply again in the future. We appreciate your time.</p>
         <button class="btn-start" id="koBtn" style="max-width:280px;margin:0 auto;">
@@ -847,6 +898,7 @@
 
 <!-- ===== RESULTS ===== -->
 <div class="page results-page" id="resultsPage">
+    <div class="results-grid"></div>
     <div class="thanks-card">
         <div class="thanks-check">
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
@@ -878,22 +930,10 @@ const i18n = {
         cont: "Continue",
         finish: "Finish",
         qLabel: "Question",
-        resultsTitle: "Evaluation Complete",
-        infoTitle: "Applicant Info",
-        breakdownTitle: "Answer Breakdown",
-        passMsg: "Great work! Your results show solid field experience. We'll be in touch within 1\u20132 business days to set up a quick call.",
-        failMsg: "Thanks for completing this evaluation. We're not able to move forward with placement at this time, but we'll keep your information on file. If you gain more hands-on PEMB experience, don't hesitate to apply again.",
-        copy: "Copy",
-        print: "Print",
-        restart: "Restart",
-        copied: "Copied to clipboard!",
-        scoreOf: "of 8",
-        yourAnswer: "Your answer",
-        correctAnswer: "Correct",
         validName: "Please enter your name",
         validContact: "Please fill in all contact fields",
         validLocation: "Please enter your location",
-        validLang: "Please select at least one language",
+        validLang: "Please select a language option",
         validSelect: "Please select an answer",
         questions: [
             {
@@ -922,8 +962,8 @@ const i18n = {
                   { label: "Wall Panel Install", key: "wallPanel" },
                   { label: "Roof Panel Install", key: "roofPanel" },
                   { label: "Blueprint Reading", key: "blueprint" },
-                  { label: "Insulated Metal Panel Install ‚Äî Roof", key: "impRoof" },
-                  { label: "Insulated Metal Panel Install ‚Äî Walls", key: "impWall" }
+                  { label: "Insulated Metal Panel Install \u2014 Roof", key: "impRoof" },
+                  { label: "Insulated Metal Panel Install \u2014 Walls", key: "impWall" }
               ]
             },
             { cat: "technical", catLabel: "Technical Knowledge",
@@ -1012,68 +1052,56 @@ const i18n = {
         ]
     },
     es: {
-        badge: "Prueba de Instalaci√≥n PEMB",
-        title: "Alpha Labor Co \u2014 Prueba de Instalaci√≥n de Edificios Met√°licos Pre-Ingenierizados",
-        intro: "Gracias por tu inter√©s en unirte a nuestro equipo. Esta prueba eval√∫a tu conocimiento y experiencia pr√°ctica en la instalaci√≥n de edificios met√°licos pre-ingenierizados (PEMB) para asignarte a los proyectos adecuados.",
+        badge: "Prueba de Montaje PEMB",
+        title: "Alpha Labor Co \u2014 Prueba de Montaje de Edificios Met\u00e1licos Pre-Ingenier\u00eda",
+        intro: "Gracias por tu inter\u00e9s en formar parte de nuestro equipo. Esta prueba eval\u00faa tu conocimiento y experiencia pr\u00e1ctica en el montaje de edificios met\u00e1licos pre-ingenier\u00eda (PEMB) para ubicarte en los proyectos adecuados.",
         chip1: "15 preguntas, 5-10 min",
-        chip2: "Sin preguntas trampa",
-        chip3: "Conocimiento e info b\u00e1sica",
+        chip2: "Sin preguntas capciosas",
+        chip3: "Conocimiento e informaci\u00f3n general",
         chip4: "S\u00e9 honesto, eso es todo",
-        note: "Tus resultados nos ayudan a encontrar la mejor posici\u00f3n para ti. Esto no es aprobar o reprobar \u2014 se trata de encontrar d\u00f3nde vas a tener \u00e9xito.",
+        note: "Tus resultados nos ayudan a encontrar la mejor posici\u00f3n para ti. No es aprobar o reprobar \u2014 se trata de encontrar d\u00f3nde vas a tener \u00e9xito.",
         start: "Comenzar Evaluaci\u00f3n",
         koTitle: "Gracias por tu inter\u00e9s en Alpha Labor Co",
-        koText: "Esta posici\u00f3n requiere experiencia pr\u00e1ctica en la instalaci\u00f3n de edificios met\u00e1licos pre-ingenierizados. Te animamos a ganar experiencia en campo y volver a aplicar en el futuro.",
-        koBtn: "Comenzar de Nuevo",
+        koText: "Este puesto requiere experiencia pr\u00e1ctica en el montaje de edificios met\u00e1licos pre-ingenier\u00eda. Te invitamos a adquirir experiencia en campo y volver a postularte en el futuro. Agradecemos tu tiempo.",
+        koBtn: "Volver al Inicio",
         back: "Atr\u00e1s",
         cont: "Continuar",
         finish: "Finalizar",
         qLabel: "Pregunta",
-        resultsTitle: "Evaluaci\u00f3n Completa",
-        infoTitle: "Info del Aplicante",
-        breakdownTitle: "Detalle de Respuestas",
-        passMsg: "\u00a1Buen trabajo! Tus resultados muestran experiencia s\u00f3lida. Nos pondremos en contacto en 1 a 2 d\u00edas h\u00e1biles.",
-        failMsg: "Gracias por completar esta evaluaci\u00f3n. No podemos avanzar con la colocaci\u00f3n en este momento, pero guardaremos tu informaci\u00f3n. Si ganas m\u00e1s experiencia pr\u00e1ctica en PEMB, no dudes en volver a aplicar.",
-        copy: "Copiar",
-        print: "Imprimir",
-        restart: "Reiniciar",
-        copied: "\u00a1Copiado!",
-        scoreOf: "de 8",
-        yourAnswer: "Tu respuesta",
-        correctAnswer: "Correcto",
         validName: "Por favor ingresa tu nombre",
         validContact: "Por favor completa todos los campos de contacto",
         validLocation: "Por favor ingresa tu ubicaci\u00f3n",
-        validLang: "Por favor selecciona al menos un idioma",
+        validLang: "Por favor selecciona una opci\u00f3n de idioma",
         validSelect: "Por favor selecciona una respuesta",
         questions: [
             {
-                cat: "info", catLabel: "Comenzando",
-                title: "\u00bfHas instalado personalmente edificios met\u00e1licos pre-ingenierizados?",
-                sub: "No solo haber trabajado alrededor de ellos \u2014 realmente armado marcos, instalado largueros, levantado acero o paneles.",
+                cat: "info", catLabel: "Para Comenzar",
+                title: "\u00bfHas montado personalmente edificios met\u00e1licos pre-ingenier\u00eda?",
+                sub: "No solo haber trabajado cerca de ellos \u2014 haber armado marcos, instalado largueros, levantado acero o colocado paneles.",
                 type: "radio",
-                opts: ["S\u00ed, tengo experiencia pr\u00e1ctica en instalaci\u00f3n de PEMB", "No, no tengo"]
+                opts: ["S\u00ed, tengo experiencia pr\u00e1ctica en montaje de PEMB", "No, no tengo experiencia"]
             },
-            { cat: "info", catLabel: "Info Personal", title: "Nombre completo", type: "text", placeholder: "Ingresa tu nombre completo" },
-            { cat: "info", catLabel: "Info Personal", title: "Informaci\u00f3n de contacto", type: "contact",
+            { cat: "info", catLabel: "Informaci\u00f3n Personal", title: "Nombre completo", type: "text", placeholder: "Escribe tu nombre completo" },
+            { cat: "info", catLabel: "Informaci\u00f3n Personal", title: "Informaci\u00f3n de contacto", type: "contact",
               fields: [
-                  { label: "Correo electr\u00f3nico", inputType: "email", placeholder: "tu@email.com" },
+                  { label: "Correo electr\u00f3nico", inputType: "email", placeholder: "tu@correo.com" },
                   { label: "N\u00famero de tel\u00e9fono", inputType: "tel", placeholder: "(555) 555-5555" }
               ]
             },
-            { cat: "info", catLabel: "Info Personal", title: "\u00bfD\u00f3nde te encuentras actualmente?", sub: "Ciudad, Estado", type: "text", placeholder: "ej. Houston, TX" },
-            { cat: "info", catLabel: "Info Personal", title: "\u00bfQu\u00e9 idiomas hablas?", type: "radio",
-              opts: ["Ingl\u00e9s", "Ingl\u00e9s y Espa\u00f1ol", "Solo Espa\u00f1ol", "Espa\u00f1ol, ingl\u00e9s limitado"]
+            { cat: "info", catLabel: "Informaci\u00f3n Personal", title: "\u00bfD\u00f3nde te encuentras actualmente?", sub: "Ciudad, Estado", type: "text", placeholder: "ej. Houston, TX" },
+            { cat: "info", catLabel: "Informaci\u00f3n Personal", title: "\u00bfQu\u00e9 idiomas hablas?", type: "radio",
+              opts: ["Ingl\u00e9s", "Ingl\u00e9s y espa\u00f1ol", "Solo espa\u00f1ol", "Espa\u00f1ol, ingl\u00e9s limitado"]
             },
             { cat: "info", catLabel: "Autoevaluaci\u00f3n",
-              title: "Califica tu nivel de habilidad (1-10) para cada uno de los siguientes:",
+              title: "Califica tu nivel de habilidad (1-10) en cada una de las siguientes \u00e1reas:",
               type: "rating",
               skills: [
-                  { label: "Instalaci\u00f3n PEMB (montaje general)", key: "pemb" },
-                  { label: "Instalaci\u00f3n de Paneles de Pared", key: "wallPanel" },
-                  { label: "Instalaci\u00f3n de Paneles de Techo", key: "roofPanel" },
-                  { label: "Lectura de Planos", key: "blueprint" },
-                  { label: "Instalaci\u00f3n de Panel Met\u00e1lico Aislado \u2014 Techo", key: "impRoof" },
-                  { label: "Instalaci\u00f3n de Panel Met\u00e1lico Aislado \u2014 Paredes", key: "impWall" }
+                  { label: "Montaje PEMB (montaje general)", key: "pemb" },
+                  { label: "Instalaci\u00f3n de paneles de pared", key: "wallPanel" },
+                  { label: "Instalaci\u00f3n de paneles de techo", key: "roofPanel" },
+                  { label: "Lectura de planos", key: "blueprint" },
+                  { label: "Panel met\u00e1lico aislado (IMP) \u2014 Techo", key: "impRoof" },
+                  { label: "Panel met\u00e1lico aislado (IMP) \u2014 Paredes", key: "impWall" }
               ]
             },
             { cat: "technical", catLabel: "Conocimiento T\u00e9cnico",
@@ -1083,78 +1111,78 @@ const i18n = {
                   "El girt va en la pared; el purlin va en el techo",
                   "El girt va en el techo; el purlin va en la pared",
                   "Son lo mismo, solo de diferente tama\u00f1o",
-                  "Un girt es un perno; un purlin es un arriostramiento"
+                  "El girt es un perno; el purlin es un arriostramiento"
               ]
             },
             { cat: "technical", catLabel: "Conocimiento T\u00e9cnico",
-              title: "\u00bfD\u00f3nde va la moldura de alero y la moldura de pendiente?",
+              title: "\u00bfD\u00f3nde va el eave trim (moldura de alero) y d\u00f3nde va el rake trim (moldura de aguas)?",
               type: "mc", correct: 1,
               opts: [
-                  "La moldura de alero va en la cima; la de pendiente va en la base",
-                  "La moldura de alero va a lo largo del borde horizontal donde el techo se une con la pared lateral; la de pendiente va a lo largo del borde inclinado en el extremo del front\u00f3n",
-                  "Ambas van en la cumbrera",
-                  "La moldura de alero va en la pared frontal; la de pendiente va en la pared lateral"
+                  "El eave trim va en la cumbrera; el rake trim va en la base",
+                  "El eave trim va en el borde horizontal donde el techo se une con la pared lateral; el rake trim va en el borde inclinado del front\u00f3n",
+                  "Ambos van en la cumbrera",
+                  "El eave trim va en la pared frontal; el rake trim va en la pared lateral"
               ]
             },
             { cat: "technical", catLabel: "Conocimiento T\u00e9cnico",
-              title: "\u00bfCu\u00e1ndo se aprietan completamente los pernos del marco?",
+              title: "\u00bfCu\u00e1ndo se aprietan completamente los pernos del marco de un edificio met\u00e1lico?",
               type: "mc", correct: 1,
               opts: [
-                  "Inmediatamente al instalar cada perno",
-                  "Dejarlos ajustados hasta que el marco est\u00e9 aplomado y escuadrado, luego hacer el apriete final",
-                  "Despu\u00e9s de que los paneles del techo est\u00e9n instalados",
-                  "No importa mientras est\u00e9n apretados antes de irse"
+                  "Inmediatamente al colocar cada perno",
+                  "Se dejan ajustados a mano hasta que el marco est\u00e9 aplomado y escuadrado, luego se hace el apriete final",
+                  "Despu\u00e9s de instalar los paneles del techo",
+                  "No importa, con tal de que est\u00e9n apretados antes de terminar"
               ]
             },
             { cat: "technical", catLabel: "Conocimiento T\u00e9cnico",
-              title: "\u00bfC\u00f3mo verificas si un edificio est\u00e1 escuadrado?",
+              title: "\u00bfC\u00f3mo verificas que un edificio est\u00e9 a escuadra antes de colocar los paneles?",
               type: "mc", correct: 1,
               opts: [
-                  "Calcularlo a ojo desde la esquina",
-                  "Medir las diagonales de esquina a esquina \u2014 ambas medidas deben coincidir",
-                  "Verificar si los marcos de las puertas est\u00e1n nivelados",
-                  "No se verifica \u2014 los paneles lo enderezar\u00e1n"
+                  "Se calcula a ojo desde una esquina",
+                  "Se miden las diagonales de esquina a esquina \u2014 ambas medidas deben ser iguales",
+                  "Se revisa si los marcos de las puertas est\u00e1n a nivel",
+                  "No se verifica \u2014 los paneles lo van a enderezar"
               ]
             },
             { cat: "technical", catLabel: "Conocimiento T\u00e9cnico",
-              title: "\u00bfPara qu\u00e9 se usa una llave de montaje (spud wrench)?",
+              title: "\u00bfPara qu\u00e9 sirve una llave de montaje (spud wrench)?",
               type: "mc", correct: 1,
               opts: [
-                  "Cortar paneles met\u00e1licos",
-                  "Alinear agujeros de pernos usando el extremo c\u00f3nico, adem\u00e1s de apretar pernos con el extremo de llave",
-                  "Medir el torque de los pernos",
-                  "Doblar molduras y tapajuntas"
+                  "Para cortar paneles met\u00e1licos",
+                  "Para alinear los agujeros de los pernos con el extremo c\u00f3nico y apretar pernos con el extremo de llave",
+                  "Para medir el torque de los pernos",
+                  "Para doblar molduras y tapajuntas"
               ]
             },
             { cat: "technical", catLabel: "Conocimiento T\u00e9cnico",
-              title: "\u00bfQu\u00e9 hace la cinta de butilo (mastic) en el techo de un edificio met\u00e1lico?",
+              title: "\u00bfQu\u00e9 funci\u00f3n tiene la cinta de butilo (mastic) en el techo de un edificio met\u00e1lico?",
               type: "mc", correct: 2,
               opts: [
-                  "Sostiene los paneles juntos hasta que se pongan los tornillos",
+                  "Mantiene los paneles unidos hasta que se colocan los tornillos",
                   "A\u00edsla entre los paneles y los largueros",
-                  "Sella los traslapes laterales para evitar que el agua se filtre por debajo",
-                  "Es decorativo \u2014 cubre las cabezas de los tornillos"
+                  "Sella los traslapes laterales de los paneles para evitar filtraciones de agua",
+                  "Es decorativa \u2014 cubre las cabezas de los tornillos"
               ]
             },
             { cat: "technical", catLabel: "Conocimiento T\u00e9cnico",
-              title: "\u00bfA qu\u00e9 altura se requiere protecci\u00f3n contra ca\u00eddas seg\u00fan OSHA?",
+              title: "\u00bfA qu\u00e9 altura exige OSHA el uso de protecci\u00f3n contra ca\u00eddas durante el montaje de acero?",
               type: "mc", correct: 2,
               opts: ["6 pies (1.8 m)", "10 pies (3 m)", "15 pies (4.5 m)", "20 pies (6 m)"]
             },
             { cat: "logistics", catLabel: "Log\u00edstica",
-              title: "Marca todo lo que aplique:",
+              title: "Selecciona todo lo que aplique:",
               type: "checkbox",
               opts: [
-                  "Tengo transporte confiable para llegar a los sitios de trabajo",
-                  "Tengo mis propias herramientas b\u00e1sicas de mano",
-                  "Estoy dispuesto a viajar para proyectos extendidos",
-                  "Estoy disponible para comenzar dentro de 2 semanas",
-                  "Tengo certificaci\u00f3n OSHA 10 u OSHA 30",
-                  "Tengo certificaci\u00f3n de protecci\u00f3n contra ca\u00eddas"
+                  "Tengo transporte confiable para llegar a las obras",
+                  "Tengo mis propias herramientas manuales b\u00e1sicas",
+                  "Estoy dispuesto a viajar para proyectos de mayor duraci\u00f3n",
+                  "Puedo comenzar en las pr\u00f3ximas 2 semanas",
+                  "Cuento con certificaci\u00f3n OSHA 10 u OSHA 30",
+                  "Cuento con certificaci\u00f3n de protecci\u00f3n contra ca\u00eddas"
               ]
             },
-            { cat: "referral", catLabel: "Referido",
-              title: "\u00bfConoces instaladores PEMB experimentados que quieran trabajar con nosotros?",
+            { cat: "referral", catLabel: "Referencias",
+              title: "\u00bfConoces montadores de PEMB con experiencia que quieran trabajar con nosotros?",
               type: "referral",
               opts: ["S\u00ed", "No"],
               followUp: "\u00bfCu\u00e1ntos?"
@@ -1237,7 +1265,6 @@ function renderQ() {
 
     const card = document.getElementById('questionCard');
     card.innerHTML = '';
-    // Force re-animation
     card.style.animation = 'none';
     card.offsetHeight;
     card.style.animation = '';
@@ -1365,7 +1392,6 @@ function renderQ() {
         });
     } else if (q.type === 'referral') {
         if (!answers[qi]) answers[qi] = {};
-        // Yes/No radio
         q.opts.forEach((opt, i) => {
             const item = document.createElement('div');
             item.className = 'option-item' + (answers[qi].hasReferrals === i ? ' selected' : '');
@@ -1378,13 +1404,11 @@ function renderQ() {
                 body.querySelectorAll('.option-item').forEach(x => x.classList.remove('selected'));
                 item.classList.add('selected');
                 answers[qi].hasReferrals = i;
-                // Show/hide follow-up
                 const fu = body.querySelector('.referral-followup');
                 if (fu) fu.style.display = i === 0 ? 'block' : 'none';
             });
             body.appendChild(item);
         });
-        // How many follow-up
         const fu = document.createElement('div');
         fu.className = 'referral-followup';
         fu.style.display = answers[qi].hasReferrals === 0 ? 'block' : 'none';
@@ -1415,7 +1439,6 @@ document.getElementById('prevBtn').addEventListener('click', () => {
 });
 
 document.getElementById('nextBtn').addEventListener('click', () => {
-    // Validate
     if (qi === 0 && answers[0] === undefined) { toast(t('validSelect')); return; }
     if (qi === 1 && !answers[1]) { toast(t('validName')); return; }
     if (qi === 2 && (!answers[2] || !answers[2][0] || !answers[2][1])) { toast(t('validContact')); return; }
@@ -1423,7 +1446,6 @@ document.getElementById('nextBtn').addEventListener('click', () => {
     if (qi === 4 && answers[4] === undefined) { toast(t('validLang')); return; }
     if (qi >= 6 && qi <= 12 && answers[qi] === undefined) { toast(t('validSelect')); return; }
 
-    // Knockout
     if (qi === 0 && answers[0] === 1) {
         showPage('knockoutPage');
         return;
@@ -1449,8 +1471,8 @@ function calcScore() {
 // ========== RESULTS ==========
 function showResults() {
     showPage('resultsPage');
-    document.getElementById('thanksTitle').textContent = lang === 'es' ? '\u00a1Gracias por enviar!' : 'Thanks for submitting!';
-    document.getElementById('thanksText').textContent = lang === 'es' ? 'Un gerente de operaciones de campo se pondr\u00e1 en contacto pronto.' : 'A field ops manager will be in contact shortly.';
+    document.getElementById('thanksTitle').textContent = lang === 'es' ? '\u00a1Gracias por enviar tu evaluaci\u00f3n!' : 'Thanks for submitting!';
+    document.getElementById('thanksText').textContent = lang === 'es' ? 'Un gerente de operaciones de campo se pondr\u00e1 en contacto contigo pronto.' : 'A field ops manager will be in contact shortly.';
     document.getElementById('thanksSub').textContent = lang === 'es' ? 'Agradecemos tu tiempo e inter\u00e9s en Alpha Labor Co.' : 'We appreciate your time and interest in Alpha Labor Co.';
 }
 
