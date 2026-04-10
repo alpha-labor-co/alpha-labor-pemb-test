@@ -821,7 +821,7 @@
             <span class="landing-badge" id="landingBadge">PEMB Erection Screening Test</span>
         </div>
 
-        <h1 id="landingTitle">Alpha Labor Co ‚Äî Pre-Engineered Metal Building Erection Screening Test</h1>
+        <h1 id="landingTitle">Alpha Labor Co — Pre-Engineered Metal Building Erection Screening Test</h1>
         <p class="intro" id="landingIntro">Thanks for your interest in joining our team. This screening test evaluates your knowledge and hands-on experience with pre-engineered metal building (PEMB) erection to help us match you to the right projects.</p>
 
         <div class="info-grid" id="infoGrid">
@@ -1165,7 +1165,7 @@ const i18n = {
               ]
             },
             { cat: "technical", catLabel: "Conocimiento T\u00e9cnico",
-              title: "\u00bfA qu\u00e9 altura exige OSHA el uso de protecci\u00f3n contra ca\u00eddas durante el montaje de acero?",
+              title: "\u00bfA qu\u00e9 altura exige OSHA el uso de protecci\u00f3n contra ca\u00eedas durante el montaje de acero?",
               type: "mc", correct: 2,
               opts: ["6 pies (1.8 m)", "10 pies (3 m)", "15 pies (4.5 m)", "20 pies (6 m)"]
             },
@@ -1178,7 +1178,7 @@ const i18n = {
                   "Estoy dispuesto a viajar para proyectos de mayor duraci\u00f3n",
                   "Puedo comenzar en las pr\u00f3ximas 2 semanas",
                   "Cuento con certificaci\u00f3n OSHA 10 u OSHA 30",
-                  "Cuento con certificaci\u00f3n de protecci\u00f3n contra ca\u00eddas"
+                  "Cuento con certificaci\u00f3n de protecci\u00f3n contra ca\u00eedas"
               ]
             },
             { cat: "referral", catLabel: "Referencias",
@@ -1190,6 +1190,14 @@ const i18n = {
         ]
     }
 };
+
+// ========== URL PARAMS ==========
+const urlParams = new URLSearchParams(window.location.search);
+const recordId = urlParams.get('record_id') || '';
+const prefillName = urlParams.get('name') || '';
+const prefillPhone = urlParams.get('phone') || '';
+const prefillLocation = urlParams.get('location') || '';
+const prefillJobTitle = urlParams.get('job_title') || '';
 
 // ========== STATE ==========
 let lang = 'en';
@@ -1317,6 +1325,8 @@ function renderQ() {
         inp.className = 'field-input';
         inp.placeholder = q.placeholder || '';
         inp.value = answers[qi] || '';
+        if (qi === 1 && !answers[qi] && prefillName) { inp.value = prefillName; answers[qi] = prefillName; }
+        if (qi === 3 && !answers[qi] && prefillLocation) { inp.value = prefillLocation; answers[qi] = prefillLocation; }
         inp.addEventListener('input', () => { answers[qi] = inp.value; });
         grp.appendChild(inp);
         body.appendChild(grp);
@@ -1335,6 +1345,7 @@ function renderQ() {
             inp.className = 'field-input';
             inp.placeholder = f.placeholder || '';
             inp.value = answers[qi][i] || '';
+            if (qi === 2 && !answers[qi][i] && i === 1 && prefillPhone) { inp.value = prefillPhone; answers[qi][i] = prefillPhone; }
             inp.addEventListener('input', () => {
                 if (!answers[qi]) answers[qi] = [];
                 answers[qi][i] = inp.value;
@@ -1474,6 +1485,72 @@ function showResults() {
     document.getElementById('thanksTitle').textContent = lang === 'es' ? '\u00a1Gracias por enviar tu evaluaci\u00f3n!' : 'Thanks for submitting!';
     document.getElementById('thanksText').textContent = lang === 'es' ? 'Un gerente de operaciones de campo se pondr\u00e1 en contacto contigo pronto.' : 'A field ops manager will be in contact shortly.';
     document.getElementById('thanksSub').textContent = lang === 'es' ? 'Agradecemos tu tiempo e inter\u00e9s en Alpha Labor Co.' : 'We appreciate your time and interest in Alpha Labor Co.';
+
+    // --- Build the payload with all form answers ---
+    const questions = qs();
+    const logisticsQ = questions[13];
+    const logisticsAnswers = answers[13] || [];
+    const logisticsLabels = logisticsAnswers.map(i => logisticsQ.opts[i]);
+
+    const payload = {
+        record_id: recordId,
+        name: answers[1] || prefillName,
+        email: (answers[2] && answers[2][0]) ? answers[2][0] : '',
+        phone: (answers[2] && answers[2][1]) ? answers[2][1] : prefillPhone,
+        location: answers[3] || prefillLocation,
+        job_title: prefillJobTitle,
+        language: questions[4].opts[answers[4]] || '',
+        form_language: lang,
+        skills: answers[5] || {},
+        technical_score: calcScore(),
+        technical_total: 7,
+        technical_answers: {},
+        has_transportation: logisticsLabels.some(l => l.includes('transportation') || l.includes('transporte')),
+        has_own_tools: logisticsLabels.some(l => l.includes('hand tools') || l.includes('herramientas')),
+        willing_to_travel: logisticsLabels.some(l => l.includes('travel') || l.includes('viajar')),
+        available_2_weeks: logisticsLabels.some(l => l.includes('2 weeks') || l.includes('2 semanas')),
+        has_osha: logisticsLabels.some(l => l.includes('OSHA')),
+        has_fall_protection: logisticsLabels.some(l => l.includes('fall protection') || l.includes('ca\u00eedas')),
+        logistics_raw: logisticsLabels,
+        has_referrals: answers[14] ? answers[14].hasReferrals === 0 : false,
+        referral_count: (answers[14] && answers[14].howMany) ? parseInt(answers[14].howMany) : 0,
+        submitted_at: new Date().toISOString(),
+        passed_knockout: true
+    };
+
+    for (let i = 6; i <= 12; i++) {
+        if (answers[i] !== undefined) {
+            payload.technical_answers['q' + (i + 1)] = {
+                selected: answers[i],
+                correct: questions[i].correct,
+                is_correct: answers[i] === questions[i].correct
+            };
+        }
+    }
+
+    // --- Send to Make.com webhook ---
+    const WEBHOOK_URL = 'https://hook.us2.make.com/ev819ap5k18j0knhn9eiddijmzo8ud9i';
+
+    if (WEBHOOK_URL !== 'REPLACE_WITH_WEBHOOK_URL') {
+        fetch(WEBHOOK_URL, {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify(payload)
+        })
+        .then(response => {
+            if (!response.ok) {
+                console.error('Webhook failed:', response.status);
+            } else {
+                console.log('Results submitted successfully');
+            }
+        })
+        .catch(err => {
+            console.error('Webhook error:', err);
+        });
+    } else {
+        console.warn('Webhook URL not configured - results not submitted');
+        console.log('Payload that would be sent:', payload);
+    }
 }
 
 // Init
