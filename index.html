@@ -1,4 +1,10 @@
-<!DOCTYPE html>
+{ cat: "info", catLabel: "Info Personal",
+              title: "¿Cuántos años de experiencia en instalación de PEMB tienes?",
+              sub: "Incluye tiempo instalando edificios metálicos pre-ingenierizados — marcos, largueros, paneles, molduras.",
+              type: "radio",
+              opts: ["Menos de 1 año", "1-2 años", "2-5 años", "5+ años", "10+ años"]
+            },
+            <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -821,13 +827,13 @@
             <span class="landing-badge" id="landingBadge">PEMB Erection Screening Test</span>
         </div>
 
-        <h1 id="landingTitle">Alpha Labor Co — Pre-Engineered Metal Building Erection Screening Test</h1>
+        <h1 id="landingTitle">Alpha Labor Co â Pre-Engineered Metal Building Erection Screening Test</h1>
         <p class="intro" id="landingIntro">Thanks for your interest in joining our team. This screening test evaluates your knowledge and hands-on experience with pre-engineered metal building (PEMB) erection to help us match you to the right projects.</p>
 
         <div class="info-grid" id="infoGrid">
             <div class="info-chip">
                 <div class="icon blue"><svg viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm1-12a1 1 0 10-2 0v4a1 1 0 00.293.707l2.828 2.829a1 1 0 101.415-1.415L11 9.586V6z" clip-rule="evenodd"/></svg></div>
-                <div class="text" data-i18n="chip1">15 questions, 5-10 min</div>
+                <div class="text" data-i18n="chip1">16 questions, 5-10 min</div>
             </div>
             <div class="info-chip">
                 <div class="icon green"><svg viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/></svg></div>
@@ -917,7 +923,7 @@ const i18n = {
         badge: "PEMB Erection Screening Test",
         title: "Alpha Labor Co \u2014 Pre-Engineered Metal Building Erection Screening Test",
         intro: "Thanks for your interest in joining our team. This screening test evaluates your knowledge and hands-on experience with pre-engineered metal building (PEMB) erection to help us match you to the right projects.",
-        chip1: "15 questions, 5-10 min",
+        chip1: "16 questions, 5-10 min",
         chip2: "No trick questions",
         chip3: "Mix of knowledge & info",
         chip4: "Be honest, that's it",
@@ -953,6 +959,12 @@ const i18n = {
             { cat: "info", catLabel: "Personal Info", title: "Where are you currently located?", sub: "City, State", type: "text", placeholder: "e.g. Houston, TX" },
             { cat: "info", catLabel: "Personal Info", title: "What languages do you speak?", type: "radio",
               opts: ["English", "English & Spanish", "Spanish only", "Spanish, limited English"]
+            },
+            { cat: "info", catLabel: "Personal Info",
+              title: "How many years of PEMB erection experience do you have?",
+              sub: "Include time spent erecting pre-engineered metal buildings — frames, purlins, panels, trim.",
+              type: "radio",
+              opts: ["Less than 1 year", "1-2 years", "2-5 years", "5+ years", "10+ years"]
             },
             { cat: "info", catLabel: "Self Assessment",
               title: "Rate your skill level (1-10) for each of the following:",
@@ -1055,7 +1067,7 @@ const i18n = {
         badge: "Prueba de Montaje PEMB",
         title: "Alpha Labor Co \u2014 Prueba de Montaje de Edificios Met\u00e1licos Pre-Ingenier\u00eda",
         intro: "Gracias por tu inter\u00e9s en formar parte de nuestro equipo. Esta prueba eval\u00faa tu conocimiento y experiencia pr\u00e1ctica en el montaje de edificios met\u00e1licos pre-ingenier\u00eda (PEMB) para ubicarte en los proyectos adecuados.",
-        chip1: "15 preguntas, 5-10 min",
+        chip1: "16 preguntas, 5-10 min",
         chip2: "Sin preguntas capciosas",
         chip3: "Conocimiento e informaci\u00f3n general",
         chip4: "S\u00e9 honesto, eso es todo",
@@ -1455,7 +1467,8 @@ document.getElementById('nextBtn').addEventListener('click', () => {
     if (qi === 2 && (!answers[2] || !answers[2][0] || !answers[2][1])) { toast(t('validContact')); return; }
     if (qi === 3 && !answers[3]) { toast(t('validLocation')); return; }
     if (qi === 4 && answers[4] === undefined) { toast(t('validLang')); return; }
-    if (qi >= 6 && qi <= 12 && answers[qi] === undefined) { toast(t('validSelect')); return; }
+    if (qi === 5 && answers[5] === undefined) { shakeBtn(); return; }
+          if (qi >= 7 && qi <= 13 && answers[qi] === undefined) { toast(t('validSelect')); return; }
 
     if (qi === 0 && answers[0] === 1) {
         showPage('knockoutPage');
@@ -1473,7 +1486,7 @@ document.getElementById('nextBtn').addEventListener('click', () => {
 // ========== SCORE ==========
 function calcScore() {
     let s = 0;
-    for (let i = 6; i <= 12; i++) {
+    for (let i = 7; i <= 13; i++) {
         if (qs()[i].correct !== undefined && answers[i] === qs()[i].correct) s++;
     }
     return s;
@@ -1482,26 +1495,32 @@ function calcScore() {
 // ========== RESULTS ==========
 function showResults() {
     showPage('resultsPage');
-    document.getElementById('thanksTitle').textContent = lang === 'es' ? '\u00a1Gracias por enviar tu evaluaci\u00f3n!' : 'Thanks for submitting!';
-    document.getElementById('thanksText').textContent = lang === 'es' ? 'Un gerente de operaciones de campo se pondr\u00e1 en contacto contigo pronto.' : 'A field ops manager will be in contact shortly.';
-    document.getElementById('thanksSub').textContent = lang === 'es' ? 'Agradecemos tu tiempo e inter\u00e9s en Alpha Labor Co.' : 'We appreciate your time and interest in Alpha Labor Co.';
 
-    // --- Build the payload with all form answers ---
+    document.getElementById('thanksTitle').textContent =
+        lang === 'es' ? '¡Gracias por enviar tu evaluación!' : 'Thanks for submitting!';
+    document.getElementById('thanksText').textContent =
+        lang === 'es'
+            ? 'Un gerente de operaciones de campo se pondrá en contacto contigo pronto.'
+            : 'A field ops manager will be in contact shortly.';
+    document.getElementById('thanksSub').textContent =
+        lang === 'es'
+            ? 'Agradecemos tu tiempo e interés en Alpha Labor Co.'
+            : 'We appreciate your time and interest in Alpha Labor Co.';
+
     const questions = qs();
-    const logisticsQ = questions[13];
-    const logisticsAnswers = answers[13] || [];
+    const logisticsQ = questions[14];
+    const logisticsAnswers = answers[14] || [];
     const logisticsLabels = logisticsAnswers.map(i => logisticsQ.opts[i]);
 
     const payload = {
-        record_id: recordId,
-        name: answers[1] || prefillName,
+        name: answers[1] || '',
         email: (answers[2] && answers[2][0]) ? answers[2][0] : '',
-        phone: (answers[2] && answers[2][1]) ? answers[2][1] : prefillPhone,
-        location: answers[3] || prefillLocation,
-        job_title: prefillJobTitle,
+        phone: (answers[2] && answers[2][1]) ? answers[2][1] : '',
+        location: answers[3] || '',
         language: questions[4].opts[answers[4]] || '',
         form_language: lang,
-        skills: answers[5] || {},
+        pemb_experience: questions[5].opts[answers[5]] || '',
+        skills: answers[6] || {},
         technical_score: calcScore(),
         technical_total: 7,
         technical_answers: {},
@@ -1510,15 +1529,15 @@ function showResults() {
         willing_to_travel: logisticsLabels.some(l => l.includes('travel') || l.includes('viajar')),
         available_2_weeks: logisticsLabels.some(l => l.includes('2 weeks') || l.includes('2 semanas')),
         has_osha: logisticsLabels.some(l => l.includes('OSHA')),
-        has_fall_protection: logisticsLabels.some(l => l.includes('fall protection') || l.includes('ca\u00eedas')),
+        has_fall_protection: logisticsLabels.some(l => l.includes('fall protection') || l.includes('caídas')),
         logistics_raw: logisticsLabels,
-        has_referrals: answers[14] ? answers[14].hasReferrals === 0 : false,
-        referral_count: (answers[14] && answers[14].howMany) ? parseInt(answers[14].howMany) : 0,
+        has_referrals: answers[15] ? answers[15].hasReferrals === 0 : false,
+        referral_count: (answers[15] && answers[15].howMany) ? parseInt(answers[15].howMany) : 0,
         submitted_at: new Date().toISOString(),
         passed_knockout: true
     };
 
-    for (let i = 6; i <= 12; i++) {
+    for (let i = 7; i <= 13; i++) {
         if (answers[i] !== undefined) {
             payload.technical_answers['q' + (i + 1)] = {
                 selected: answers[i],
@@ -1528,29 +1547,20 @@ function showResults() {
         }
     }
 
-    // --- Send to Make.com webhook ---
     const WEBHOOK_URL = 'https://hook.us2.make.com/ev819ap5k18j0knhn9eiddijmzo8ud9i';
 
-    if (WEBHOOK_URL !== 'REPLACE_WITH_WEBHOOK_URL') {
-        fetch(WEBHOOK_URL, {
-            method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify(payload)
-        })
-        .then(response => {
-            if (!response.ok) {
-                console.error('Webhook failed:', response.status);
-            } else {
-                console.log('Results submitted successfully');
-            }
-        })
-        .catch(err => {
-            console.error('Webhook error:', err);
-        });
-    } else {
-        console.warn('Webhook URL not configured - results not submitted');
-        console.log('Payload that would be sent:', payload);
-    }
+    fetch(WEBHOOK_URL, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(payload)
+    })
+    .then(response => {
+        if (!response.ok) console.error('Webhook failed:', response.status);
+        else console.log('Results submitted successfully');
+    })
+    .catch(err => {
+        console.error('Webhook error:', err);
+    });
 }
 
 // Init
