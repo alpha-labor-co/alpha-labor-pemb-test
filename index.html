@@ -1537,6 +1537,15 @@ function showResults() {
         q5_spud_wrench: answers[11] !== undefined ? enQuestions[11].opts[answers[11]] : '',
         q6_butyl_tape: answers[12] !== undefined ? enQuestions[12].opts[answers[12]] : '',
         q7_osha_fall_height: answers[13] !== undefined ? enQuestions[13].opts[answers[13]] : '',
+                // === Per-question correctness (flat, for Airtable mapping) ===
+                q1_correct: answers[7] !== undefined ? (answers[7] === enQuestions[7].correct ? 'Correct' : 'Incorrect') : '',
+                q2_correct: answers[8] !== undefined ? (answers[8] === enQuestions[8].correct ? 'Correct' : 'Incorrect') : '',
+                q3_correct: answers[9] !== undefined ? (answers[9] === enQuestions[9].correct ? 'Correct' : 'Incorrect') : '',
+                q4_correct: answers[10] !== undefined ? (answers[10] === enQuestions[10].correct ? 'Correct' : 'Incorrect') : '',
+                q5_correct: answers[11] !== undefined ? (answers[11] === enQuestions[11].correct ? 'Correct' : 'Incorrect') : '',
+                q6_correct: answers[12] !== undefined ? (answers[12] === enQuestions[12].correct ? 'Correct' : 'Incorrect') : '',
+                q7_correct: answers[13] !== undefined ? (answers[13] === enQuestions[13].correct ? 'Correct' : 'Incorrect') : '',
+                pass_fail: calcScore() >= 5 ? 'Pass' : 'Fail',
 
         // === Self-ratings (1-10 scale, flat keys) ===
         skill_pemb_install: skillRatings.pemb || '',
